@@ -6,7 +6,13 @@ module.exports = {
     "./wwwroot/css/site.pcss",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#3f51b5',
+        accent: '#ff4081',
+        warn: '#f44336'
+      }
+    },
     fontFamily: {
       sans: ['Inter', 'Roboto', 'sans-serif'],
     }
