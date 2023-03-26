@@ -8,12 +8,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amatsucozy.PMS.Security.Inf
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{C5B84952-D129-41ED-9E61-65A856D85AC2}"
 	ProjectSection(SolutionItems) = preProject
-		..\.github\workflows\Security.Analyze.yml = ..\.github\workflows\Security.Analyze.yml
+		.github\workflows\Security.Analyze.yml = .github\workflows\Security.Analyze.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{7BB6933F-372E-410C-BEC9-10B09D79CEFE}"
 	ProjectSection(SolutionItems) = preProject
-		..\nuget.config = ..\nuget.config
+		nuget.config = nuget.config
 	EndProjectSection
 EndProject
 Global
