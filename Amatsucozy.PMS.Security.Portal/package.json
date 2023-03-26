@@ -1,0 +1,19 @@
+{
+  "name": "amatsucozy.pms.security.portal",
+  "version": "1.0.0",
+  "scripts": {
+    "postcss:build:site": "postcss wwwroot/tailwind/site.pcss -o ./wwwroot/css/site.css --verbose",
+    "postcss:build:import": "postcss wwwroot/tailwind/tailwind-imports.pcss -o ./wwwroot/css/utility.css --verbose",
+    "postcss:watch:site": "postcss wwwroot/tailwind/site.pcss -o ./wwwroot/css/site.css -w --verbose",
+    "postcss:watch:import": "postcss wwwroot/tailwind/tailwind-imports.pcss -o ./wwwroot/css/utility.css -w --verbose"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.21",
+    "postcss-cli": "^10.1.0",
+    "tailwindcss": "^3.2.7"
+  },
+  "dependencies": {
+    "cssnano": "^5.1.15"
+  }
+}
