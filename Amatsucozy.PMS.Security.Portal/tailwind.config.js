@@ -14,7 +14,7 @@ module.exports = {
       }
     },
     fontFamily: {
-      sans: ['Inter', 'Roboto', 'sans-serif'],
+      sans: ['Poppins', 'Inter', 'Roboto', 'sans-serif'],
     }
   },
   plugins: [],

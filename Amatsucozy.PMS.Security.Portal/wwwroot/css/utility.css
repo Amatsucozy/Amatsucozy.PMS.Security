@@ -142,14 +142,14 @@
 .h-full {
     height: 100%
 }
-.w-40 {
-    width: 10rem
-}
 .w-full {
     width: 100%
 }
 .flex-row {
     flex-direction: row
+}
+.flex-col {
+    flex-direction: column
 }
 .items-center {
     align-items: center
@@ -163,9 +163,15 @@
 .rounded {
     border-radius: 0.25rem
 }
-.bg-primary {
-    --tw-bg-opacity: 1;
-    background-color: rgb(63 81 181 / var(--tw-bg-opacity))
+.border-2 {
+    border-width: 2px
+}
+.border-solid {
+    border-style: solid
+}
+.border-primary {
+    --tw-border-opacity: 1;
+    border-color: rgb(63 81 181 / var(--tw-border-opacity))
 }
 .bg-white {
     --tw-bg-opacity: 1;
@@ -185,7 +191,29 @@
 .text-center {
     text-align: center
 }
-.text-white {
+.font-bold {
+    font-weight: 700
+}
+.shadow-lg {
+    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+.hover\:scale-105:hover {
+    --tw-scale-x: 1.05;
+    --tw-scale-y: 1.05;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+.hover\:bg-primary:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(63 81 181 / var(--tw-bg-opacity))
+}
+.hover\:text-white:hover {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+.hover\:shadow-lg:hover {
+    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }

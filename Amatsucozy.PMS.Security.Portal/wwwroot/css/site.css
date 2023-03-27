@@ -10,7 +10,18 @@ body {
 
 * {
 
-    font-family: Inter, Roboto, sans-serif !important
+    box-sizing: border-box !important;
+
+    transition-property: all !important;
+
+    transition-duration: 300ms !important;
+
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important
+}
+
+*:not(span[class="material-icons-round"]) {
+
+    font-family: Poppins, Inter, Roboto, sans-serif !important
 }
 
 h1 {
@@ -25,11 +36,4 @@ a {
     color: inherit;
 
     text-decoration-line: none
-}
-
-a:hover {
-
-    --tw-text-opacity: 1;
-
-    color: rgb(255 64 129 / var(--tw-text-opacity))
 }

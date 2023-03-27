@@ -14,6 +14,7 @@ public static class DbStartupRoutines
         using var scope = applicationBuilder.ApplicationServices.CreateScope();
         using var pgDbContext = scope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>();
         using var configDbContext = scope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
+        using var securityDbContext = scope.ServiceProvider.GetRequiredService<SecurityDbContext>();
 
         if (pgDbContext.Database.GetPendingMigrations().Any())
         {
@@ -23,6 +24,11 @@ public static class DbStartupRoutines
         if (configDbContext.Database.GetPendingMigrations().Any())
         {
             configDbContext.Database.Migrate();
+        }
+
+        if (securityDbContext.Database.GetPendingMigrations().Any())
+        {
+            securityDbContext.Database.Migrate();
         }
         
         if (!configDbContext.Clients.Any())
