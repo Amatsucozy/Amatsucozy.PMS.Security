@@ -1,35 +1,36 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - Amatsucozy.PMS.Security.Portal</title>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/css/utility.css" asp-append-version="true"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>@ViewData["Title"] - Amatsucozy.PMS.Security.Portal</title>
+  <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+  <link rel="stylesheet" href="~/css/utility.css" asp-append-version="true"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 </head>
-<body>
-<header>
-    <nav class="w-full h-full px-4 flex flex-row justify-between items-center shadow-lg relative backdrop-blur-xl">
-        <h1>PMS Security Portal</h1>
-        <partial name="_LoginPartial" />
-    </nav>
+<body class="flex flex-col relative overflow-hidden">
+<div class="absolute w-full h-full top-0 left-0 z-[-10] overflow-hidden">
+  <figure class="m-0 w-full h-full">
+    <img src="~/images/main-bg.jpg" alt="Main background" class="w-full h-full object-cover"/>
+  </figure>
+</div>
+<header class="flex w-full justify-center items-center">
+  <nav class="w-full h-full px-4 flex flex-row justify-between items-center shadow-lg relative backdrop-blur-xl">
+    <h1>PMS Security Portal</h1>
+    <partial name="_LoginPartial"/>
+  </nav>
 </header>
-<div class="px-4">
-    <main role="main" class="pb-3">
-        @RenderBody()
-    </main>
+<div class="flex flex-col w-full p-8 overflow-auto">
+  @RenderBody()
 </div>
 
-<footer class="px-4">
-    <div class="container">
-        &copy; 2023 - Amatsucozy.PMS.Security.Portal - <a asp-area="" asp-page="/Privacy">Privacy</a>
-    </div>
+<footer class="flex w-full justify-center items-center">
+  <p>&copy; 2023 - Amatsucozy.PMS.Security.Portal - <a asp-page="/Privacy">Privacy</a></p>
 </footer>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>

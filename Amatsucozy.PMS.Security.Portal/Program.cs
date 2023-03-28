@@ -39,17 +39,13 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.Sign
 builder.Services.AddIdentityServer()
     .AddConfigurationStore(options =>
     {
-        options.ConfigureDbContext = dbOptions => dbOptions.UseNpgsql(connectionString, sqlBuilder =>
-        {
-            sqlBuilder.MigrationsAssembly(typeof(InfrastructureMarker).Assembly.GetName().Name);
-        });
+        options.ConfigureDbContext = dbOptions => dbOptions.UseNpgsql(connectionString,
+            sqlBuilder => { sqlBuilder.MigrationsAssembly(typeof(InfrastructureMarker).Assembly.GetName().Name); });
     })
     .AddOperationalStore(options =>
     {
-        options.ConfigureDbContext = dbOptions => dbOptions.UseNpgsql(connectionString, sqlBuilder =>
-        {
-            sqlBuilder.MigrationsAssembly(typeof(InfrastructureMarker).Assembly.GetName().Name);
-        });
+        options.ConfigureDbContext = dbOptions => dbOptions.UseNpgsql(connectionString,
+            sqlBuilder => { sqlBuilder.MigrationsAssembly(typeof(InfrastructureMarker).Assembly.GetName().Name); });
     })
     .AddAspNetIdentity<IdentityUser>();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();

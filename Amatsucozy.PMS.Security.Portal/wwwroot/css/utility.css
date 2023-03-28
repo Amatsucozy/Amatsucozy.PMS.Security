@@ -90,39 +90,26 @@
     --tw-backdrop-saturate:  ;
     --tw-backdrop-sepia:  
 }
-.container {
-    width: 100%
-}
-@media (min-width: 640px) {
-    .container {
-        max-width: 640px
-    }
-}
-@media (min-width: 768px) {
-    .container {
-        max-width: 768px
-    }
-}
-@media (min-width: 1024px) {
-    .container {
-        max-width: 1024px
-    }
-}
-@media (min-width: 1280px) {
-    .container {
-        max-width: 1280px
-    }
-}
-@media (min-width: 1536px) {
-    .container {
-        max-width: 1536px
-    }
-}
 .static {
     position: static
 }
 .absolute {
     position: absolute
+}
+.relative {
+    position: relative
+}
+.left-0 {
+    left: 0px
+}
+.top-0 {
+    top: 0px
+}
+.z-\[-10\] {
+    z-index: -10
+}
+.m-0 {
+    margin: 0px
 }
 .mb-3 {
     margin-bottom: 0.75rem
@@ -142,8 +129,17 @@
 .h-full {
     height: 100%
 }
+.w-4\/5 {
+    width: 80%
+}
 .w-full {
     width: 100%
+}
+.flex-1 {
+    flex: 1 1 0%
+}
+.cursor-pointer {
+    cursor: pointer
 }
 .flex-row {
     flex-direction: row
@@ -154,14 +150,32 @@
 .items-center {
     align-items: center
 }
+.justify-center {
+    justify-content: center
+}
 .justify-between {
     justify-content: space-between
 }
 .gap-2 {
     gap: 0.5rem
 }
+.gap-4 {
+    gap: 1rem
+}
+.overflow-auto {
+    overflow: auto
+}
+.overflow-hidden {
+    overflow: hidden
+}
 .rounded {
     border-radius: 0.25rem
+}
+.rounded-2xl {
+    border-radius: 1rem
+}
+.rounded-lg {
+    border-radius: 0.5rem
 }
 .border-2 {
     border-width: 2px
@@ -173,9 +187,23 @@
     --tw-border-opacity: 1;
     border-color: rgb(63 81 181 / var(--tw-border-opacity))
 }
-.bg-white {
-    --tw-bg-opacity: 1;
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+.border-white {
+    --tw-border-opacity: 1;
+    border-color: rgb(255 255 255 / var(--tw-border-opacity))
+}
+.bg-transparent {
+    background-color: transparent
+}
+.object-cover {
+    -o-object-fit: cover;
+       object-fit: cover
+}
+.p-8 {
+    padding: 2rem
+}
+.px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem
 }
 .px-4 {
     padding-left: 1rem;
@@ -185,19 +213,50 @@
     padding-top: 0.5rem;
     padding-bottom: 0.5rem
 }
-.pb-3 {
-    padding-bottom: 0.75rem
+.py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem
+}
+.pb-4 {
+    padding-bottom: 1rem
+}
+.pt-8 {
+    padding-top: 2rem
 }
 .text-center {
     text-align: center
 }
+.text-base {
+    font-size: 1rem;
+    line-height: 1.5rem
+}
 .font-bold {
     font-weight: 700
+}
+.text-red-500 {
+    --tw-text-opacity: 1;
+    color: rgb(239 68 68 / var(--tw-text-opacity))
 }
 .shadow-lg {
     --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+.shadow-xl {
+    --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+.backdrop-blur-xl {
+    --tw-backdrop-blur: blur(24px);
+    -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+            backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)
+}
+.autofill\:font-sans:-webkit-autofill {
+    font-family: Poppins, Inter, Roboto, sans-serif
+}
+.autofill\:font-sans:autofill {
+    font-family: Poppins, Inter, Roboto, sans-serif
 }
 .hover\:scale-105:hover {
     --tw-scale-x: 1.05;
@@ -216,4 +275,20 @@
     --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+.peer:-webkit-autofill ~ .peer-autofill\:-translate-y-6 {
+    --tw-translate-y: -1.5rem;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+.peer:autofill ~ .peer-autofill\:-translate-y-6 {
+    --tw-translate-y: -1.5rem;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+.peer:valid ~ .peer-valid\:-translate-y-6 {
+    --tw-translate-y: -1.5rem;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+.peer:focus ~ .peer-focus\:-translate-y-6 {
+    --tw-translate-y: -1.5rem;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }

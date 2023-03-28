@@ -1,5 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
+
 #nullable disable
 
 using System.ComponentModel.DataAnnotations;
@@ -47,7 +48,8 @@ namespace Amatsucozy.PMS.Security.Portal.Pages.Account.Manage
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
+                MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "New password")]
             public string NewPassword { get; set; }
@@ -100,6 +102,7 @@ namespace Amatsucozy.PMS.Security.Portal.Pages.Account.Manage
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
+
                 return Page();
             }
 
