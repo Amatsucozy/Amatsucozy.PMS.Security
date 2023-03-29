@@ -351,3 +351,5 @@ MigrationBackup/
 
 # User
 **/.idea
+**/wwwroot/**/site.css
+**/wwwroot/**/utility.css
