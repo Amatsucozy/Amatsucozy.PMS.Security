@@ -6,9 +6,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
+using Amatsucozy.PMS.Security.Portal.Services;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
@@ -22,21 +23,24 @@ namespace Amatsucozy.PMS.Security.Portal.Pages.Account
         private readonly IUserStore<IdentityUser> _userStore;
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        private readonly IEmailSendRequestBuilder _emailSendRequestBuilder;
+        private readonly IPublishEndpoint _publishEndpoint;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSendRequestBuilder emailSendRequestBuilder,
+            IPublishEndpoint publishEndpoint)
         {
             _userManager = userManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
-            _emailSender = emailSender;
+            _emailSendRequestBuilder = emailSendRequestBuilder;
+            _publishEndpoint = publishEndpoint;
         }
 
         /// <summary>
@@ -126,8 +130,13 @@ namespace Amatsucozy.PMS.Security.Portal.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    await _publishEndpoint.Publish(
+                        _emailSendRequestBuilder.GetConfirmEmailSendRequest(
+                            Input.Email,
+                            Input.Email,
+                            HtmlEncoder.Default.Encode(callbackUrl ?? string.Empty),
+                            "Amatsucozy"
+                        ));
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

@@ -1,4 +1,7 @@
 using Amatsucozy.PMS.Security.Infrastructure;
+using Amatsucozy.PMS.Security.Portal;
+using Amatsucozy.PMS.Security.Portal.Services;
+using Amatsucozy.PMS.Shared.Helpers.MessageQueues;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,6 +37,7 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = true;
 });
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddDefaultTokenProviders()
     .AddEntityFrameworkStores<SecurityDbContext>();
 
 builder.Services.AddIdentityServer()
@@ -71,6 +75,8 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/Account/AccessDenied";
     options.SlidingExpiration = true;
 });
+builder.Services.AddMessageQueue(builder.Configuration, typeof(PortalMarker));
+builder.Services.AddScoped<IEmailSendRequestBuilder, EmailSendRequestBuilder>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
