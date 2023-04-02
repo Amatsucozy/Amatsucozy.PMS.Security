@@ -1,3 +1,65 @@
 ﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .input-container-default {
+        @apply flex flex-col w-full relative py-4;
+    }
+    
+    .input-container-default:has(.input-suffix-default) {
+        @apply pr-12;
+    }
+
+    .input-default {
+        @apply flex w-full h-full text-base border-0 border-b-2 border-solid border-black px-2 pt-8 pb-4 bg-transparent disabled:border-dashed;
+    }
+
+    .label-default {
+        @apply font-bold absolute px-2 pt-8 pb-4;
+    }
+    
+    .input-suffix-default {
+        @apply font-bold absolute px-2 pt-8 pb-4;
+    }
+
+    .link-underline-default {
+        @apply w-full h-1 scale-x-0 bg-accent origin-left;
+    }
+
+    .link-button-default {
+        @apply flex px-4 py-2 rounded-lg border-2 border-solid font-bold hover:shadow-lg;
+    }
+
+    .link-button-primary {
+        @apply link-button-default border-primary text-black hover:bg-primary hover:text-white;
+    }
+
+    .link-button-accent {
+        @apply link-button-default border-accent text-black hover:bg-accent hover:text-white;
+    }
+
+    .link-button-warn {
+        @apply link-button-default border-warn text-black hover:bg-warn hover:text-white;
+    }
+
+    .button-default {
+        @apply link-button-default cursor-pointer bg-transparent text-base my-2;
+    }
+
+    .button-primary {
+        @apply button-default border-primary text-black hover:bg-primary hover:text-white;
+    }
+
+    .button-accent {
+        @apply button-default border-accent text-black hover:bg-accent hover:text-white;
+    }
+
+    .button-warn {
+        @apply button-default border-warn text-black hover:bg-warn hover:text-white;
+    }
+
+    .glass-container {
+        @apply flex flex-col justify-center items-center w-4/5 gap-4 backdrop-blur-xl rounded-2xl shadow-xl border-2 border-solid border-white p-8;
+    }
+}

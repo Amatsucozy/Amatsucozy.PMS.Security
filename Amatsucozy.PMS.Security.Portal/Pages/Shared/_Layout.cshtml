@@ -26,7 +26,11 @@
   </nav>
 </header>
 <div class="flex flex-col w-full p-8 overflow-auto">
-  @RenderBody()
+  <div class="flex flex-col justify-center items-center">
+    <div class="glass-container">
+      @RenderBody()
+    </div>
+  </div>
 </div>
 
 <footer class="flex w-full justify-center items-center">

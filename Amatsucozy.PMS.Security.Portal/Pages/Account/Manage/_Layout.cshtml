@@ -10,20 +10,16 @@
 }
 
 <h1>Manage your account</h1>
-
-<div>
-  <h2>Change your account settings</h2>
-  <hr/>
-  <div class="row">
-    <div class="col-md-3">
-      <partial name="_ManageNav"/>
-    </div>
-    <div class="col-md-9">
+<div class="flex flex-row w-full">
+  <div class="flex flex-1 flex-col p-8">
+    <partial name="_ManageNav"/>
+  </div>
+  <div class="w-1 h-full rounded-full bg-black"></div>
+  <div class="flex flex-1 flex-grow-[3] flex-col items-center p-8">
       @RenderBody()
-    </div>
   </div>
 </div>
 
 @section Scripts {
-  @RenderSection("Scripts", required: false)
+  @await RenderSectionAsync("Scripts", required: false)
 }

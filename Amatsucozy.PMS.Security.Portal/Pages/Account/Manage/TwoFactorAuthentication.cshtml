@@ -7,7 +7,6 @@
 }
 
 <partial name="_StatusMessage" for="StatusMessage"/>
-<h3>@ViewData["Title"]</h3>
 @{
   var consentFeature = HttpContext.Features.Get<ITrackingConsentFeature>();
   @if (consentFeature?.CanTrack ?? true)
@@ -49,7 +48,7 @@
     <h4>Authenticator app</h4>
     @if (!Model.HasAuthenticator)
     {
-      <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">Add authenticator app</a>
+      <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="link-button-primary">Add authenticator app</a>
     }
     else
     {

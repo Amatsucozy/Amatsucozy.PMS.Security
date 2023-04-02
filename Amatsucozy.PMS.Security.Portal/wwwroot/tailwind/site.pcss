@@ -19,9 +19,30 @@ h1 {
 }
 
 a {
-    @apply text-inherit no-underline;
+    @apply relative text-inherit no-underline text-primary hover:text-accent my-2;
+    @apply hover:after:origin-left hover:after:scale-x-100 !important;
 }
 
-.peer:not(.peer:placeholder-shown) + .input-label {
+a.active {
+    @apply font-bold;
+}
+
+.hoverable-underline {
+    @apply block w-max;
+}
+
+a.hoverable-underline::after {
+    @apply absolute left-0 -bottom-1 content-[''] w-full h-1 scale-x-0 rounded-full bg-accent transition-transform duration-300 ease-in-out origin-right;
+}
+
+a.hoverable-underline.active {
+    @apply hover:after:bg-accent;
+}
+
+a.hoverable-underline.active::after {
+    @apply scale-x-100 rounded-full bg-primary transition-colors duration-300 ease-in-out;
+}
+
+.peer:not(.peer:placeholder-shown) + .label-default {
     @apply -translate-y-6;
 }

@@ -138,12 +138,7 @@ namespace Amatsucozy.PMS.Security.Portal.Pages.Account
                             "Amatsucozy"
                         ));
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation",
-                            new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
+                    if (!_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
@@ -164,7 +159,7 @@ namespace Amatsucozy.PMS.Security.Portal.Pages.Account
         {
             try
             {
-                return Activator.CreateInstance<IdentityUser>();
+                return new IdentityUser();
             }
             catch
             {

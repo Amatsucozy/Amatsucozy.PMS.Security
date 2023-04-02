@@ -5,77 +5,73 @@
   ViewData["Title"] = "Log in";
 }
 
-<div class="flex flex-col justify-center items-center">
-  <div class="flex flex-col justify-center items-center w-4/5 gap-4 backdrop-blur-xl rounded-2xl shadow-xl border-2 border-solid border-white">
-    <h1>@ViewData["Title"]</h1>
-    <div class="flex flex-row">
-      <div class="flex flex-1 flex-col justify-center items-center p-8">
-        <form id="account" method="post" class="flex flex-col w-full justify-center items-center">
-          <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-          <div class="flex flex-col w-full relative py-4">
-            <input asp-for="Input.Email" class="peer flex w-full h-full autofill:font-sans text-base border-2 border-solid border-white rounded-lg px-2 pt-8 pb-4 bg-transparent" autocomplete="username" aria-required="true" placeholder=" " required/>
-            <label asp-for="Input.Email" class="font-bold absolute px-2 pt-8 pb-4 peer-autofill:-translate-y-6 peer-focus:-translate-y-6 peer-valid:-translate-y-6 input-label">Email</label>
-            <span asp-validation-for="Input.Email" class="warning text-red-500"></span>
-          </div>
-          <div class="flex flex-col w-full relative py-4">
-            <input asp-for="Input.Password" class="peer flex w-full h-full autofill:font-sans text-base border-2 border-solid border-white rounded-lg px-2 pt-8 pb-4 bg-transparent" autocomplete="current-password" aria-required="true" placeholder=" " required/>
-            <label asp-for="Input.Password" class="font-bold absolute px-2 pt-8 pb-4 peer-autofill:-translate-y-6 peer-focus:-translate-y-6 peer-valid:-translate-y-6 input-label">Password</label>
-            <span asp-validation-for="Input.Password" class="text-red-500"></span>
-          </div>
-          <div class="flex flex-col w-full relative py-4">
-            <label asp-for="Input.RememberMe" class="flex items-center gap-2">
-              <input class="accent-primary h-4 w-4 m-0" asp-for="Input.RememberMe"/>
-              @Html.DisplayNameFor(m => m.Input.RememberMe)
-            </label>
-          </div>
-          <div>
-            <button id="login-submit" type="submit" class="flex px-4 py-2 rounded cursor-pointer bg-transparent text-base border-2 border-solid border-primary font-bold hover:bg-primary hover:text-white hover:scale-105 hover:shadow-lg">Login</button>
-          </div>
-          <div>
-            <p>
-              <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-            </p>
-            <p>
-              <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-            </p>
-            <p>
-              <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-            </p>
-          </div>
-        </form>
+<h1>@ViewData["Title"]</h1>
+<div class="flex flex-row w-full">
+  <div class="flex flex-1 flex-col justify-center items-center p-8">
+    <form id="account" method="post" class="flex flex-col w-full justify-center items-center">
+      <div asp-validation-summary="ModelOnly" class="text-red-500" role="alert"></div>
+      <div class="input-container-default">
+        <input asp-for="Input.Email" class="peer input-default" autocomplete="username" aria-required="true" placeholder=" " required/>
+        <label asp-for="Input.Email" class="peer-autofill:-translate-y-6 peer-focus:-translate-y-6 peer-valid:-translate-y-6 label-default">Email</label>
+        <span asp-validation-for="Input.Email" class="text-red-500"></span>
       </div>
-      <div class="flex flex-1 flex-col items-center p-8">
-        <div class="flex flex-col gap-4">
-            <h3>Use another service to log in.</h3>
-            @{
-              if ((Model.ExternalLogins?.Count ?? 0) == 0)
-              {
-                <div>
-                  <p>
-                    There are no external authentication services configured. See this
-                    <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
-                      article
-                      about setting up this ASP.NET application to support logging in via external services
-                    </a>.
-                  </p>
-                </div>
-              }
-              else
-              {
-                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                  <div>
-                    <p>
-                      @foreach (var provider in Model.ExternalLogins!)
-                      {
-                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                      }
-                    </p>
-                  </div>
-                </form>
-              }
-            }
-        </div>
+      <div class="input-container-default">
+        <input asp-for="Input.Password" class="peer input-default" autocomplete="current-password" aria-required="true" placeholder=" " required/>
+        <label asp-for="Input.Password" class="peer-autofill:-translate-y-6 peer-focus:-translate-y-6 peer-valid:-translate-y-6 label-default">Password</label>
+        <span asp-validation-for="Input.Password" class="text-red-500"></span>
       </div>
+      <div class="flex flex-col w-full relative py-4">
+        <label asp-for="Input.RememberMe" class="flex items-center gap-2">
+          <input class="accent-primary h-4 w-4 m-0" asp-for="Input.RememberMe"/>
+          @Html.DisplayNameFor(m => m.Input.RememberMe)
+        </label>
+      </div>
+      <div>
+        <button id="login-submit" type="submit" class="button-primary">Login</button>
+      </div>
+      <div>
+        <p>
+          <a id="forgot-password" asp-page="./ForgotPassword" class="hoverable-underline">Forgot your password?</a>
+        </p>
+        <p>
+          <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="hoverable-underline">Register as a new user</a>
+        </p>
+        <p>
+          <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" class="hoverable-underline">Resend email confirmation</a>
+        </p>
+      </div>
+    </form>
+  </div>
+  <div class="flex flex-1 flex-col items-center p-8">
+    <div class="flex flex-col gap-4">
+      <h3>Use another service to log in.</h3>
+      @{
+        if ((Model.ExternalLogins?.Count ?? 0) == 0)
+        {
+          <div>
+            <p>
+              There are no external authentication services configured. See this
+              <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
+                article
+                about setting up this ASP.NET application to support logging in via external services
+              </a>.
+            </p>
+          </div>
+        }
+        else
+        {
+          <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+            <div>
+              <p>
+                @foreach (var provider in Model.ExternalLogins!)
+                {
+                  <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                }
+              </p>
+            </div>
+          </form>
+        }
+      }
     </div>
   </div>
 </div>
