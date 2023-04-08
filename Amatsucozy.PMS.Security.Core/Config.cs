@@ -36,16 +36,16 @@ public static class Config
                 },
                 RedirectUris =
                 {
-                    "http://localhost:4200",
-                    "http://localhost:4200/challenge",
+                    "https://localhost:4200",
+                    "https://localhost:4200/challenge",
                 },
                 PostLogoutRedirectUris =
                 {
-                    "http://localhost:4200"
+                    "https://localhost:4200"
                 },
                 AllowedCorsOrigins =
                 {
-                    "http://localhost:4200"
+                    "https://localhost:4200"
                 },
                 AccessTokenType = AccessTokenType.Jwt,
                 RequireClientSecret = false

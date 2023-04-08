@@ -1,7 +1,5 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amatsucozy.PMS.Security.API", "Amatsucozy.PMS.Security.API\Amatsucozy.PMS.Security.API.csproj", "{23105633-6D46-43E7-B94D-4C1AFE95FF76}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amatsucozy.PMS.Security.Core", "Amatsucozy.PMS.Security.Core\Amatsucozy.PMS.Security.Core.csproj", "{5D85FF7E-692C-43E0-929E-348F6B37C5BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amatsucozy.PMS.Security.Infrastructure", "Amatsucozy.PMS.Security.Infrastructure\Amatsucozy.PMS.Security.Infrastructure.csproj", "{DECEEF98-EF31-4C80-AEE7-EC78A916BFDC}"
@@ -18,16 +16,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amatsucozy.PMS.Security.Portal", "Amatsucozy.PMS.Security.Portal\Amatsucozy.PMS.Security.Portal.csproj", "{77E106FD-ADA9-4BA4-8056-335A94BEFB7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amatsucozy.PMS.Security.Contracts", "Amatsucozy.PMS.Security.Contracts\Amatsucozy.PMS.Security.Contracts.csproj", "{E587DA96-DDEE-42CE-87B0-5BD37CEBB221}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{23105633-6D46-43E7-B94D-4C1AFE95FF76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{23105633-6D46-43E7-B94D-4C1AFE95FF76}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{23105633-6D46-43E7-B94D-4C1AFE95FF76}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{23105633-6D46-43E7-B94D-4C1AFE95FF76}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5D85FF7E-692C-43E0-929E-348F6B37C5BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5D85FF7E-692C-43E0-929E-348F6B37C5BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D85FF7E-692C-43E0-929E-348F6B37C5BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -40,5 +36,9 @@ Global
 		{77E106FD-ADA9-4BA4-8056-335A94BEFB7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77E106FD-ADA9-4BA4-8056-335A94BEFB7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77E106FD-ADA9-4BA4-8056-335A94BEFB7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E587DA96-DDEE-42CE-87B0-5BD37CEBB221}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E587DA96-DDEE-42CE-87B0-5BD37CEBB221}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E587DA96-DDEE-42CE-87B0-5BD37CEBB221}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E587DA96-DDEE-42CE-87B0-5BD37CEBB221}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
