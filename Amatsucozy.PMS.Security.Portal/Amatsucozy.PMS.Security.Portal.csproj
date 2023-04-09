@@ -42,7 +42,7 @@
         <ProjectReference Include="..\Amatsucozy.PMS.Security.Core\Amatsucozy.PMS.Security.Core.csproj" />
         <ProjectReference Include="..\Amatsucozy.PMS.Security.Infrastructure\Amatsucozy.PMS.Security.Infrastructure.csproj" />
     </ItemGroup>
-    
+
     <ItemGroup>
         <Folder Include="wwwroot\css" />
     </ItemGroup>

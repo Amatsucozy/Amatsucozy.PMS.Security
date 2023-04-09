@@ -86,7 +86,7 @@ public class LoginModel : PageModel
             // Redirect them to the index page.
             Response.Redirect("/");
         }
-            
+
         if (!string.IsNullOrEmpty(ErrorMessage))
         {
             ModelState.AddModelError(string.Empty, ErrorMessage);

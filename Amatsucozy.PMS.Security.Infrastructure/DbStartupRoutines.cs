@@ -30,13 +30,14 @@ public static class DbStartupRoutines
         {
             securityDbContext.Database.Migrate();
         }
-        
+
         if (!configDbContext.Clients.Any())
         {
             foreach (var client in Config.Clients)
             {
                 configDbContext.Clients.Add(client.ToEntity());
             }
+
             configDbContext.SaveChanges();
         }
 
@@ -46,6 +47,7 @@ public static class DbStartupRoutines
             {
                 configDbContext.IdentityResources.Add(resource.ToEntity());
             }
+
             configDbContext.SaveChanges();
         }
 
@@ -55,6 +57,7 @@ public static class DbStartupRoutines
             {
                 configDbContext.ApiScopes.Add(resource.ToEntity());
             }
+
             configDbContext.SaveChanges();
         }
     }

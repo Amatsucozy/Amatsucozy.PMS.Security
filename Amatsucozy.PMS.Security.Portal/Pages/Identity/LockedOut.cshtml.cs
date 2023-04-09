@@ -6,6 +6,5 @@ public class LockedOut : PageModel
 {
     public void OnGet()
     {
-        
     }
 }

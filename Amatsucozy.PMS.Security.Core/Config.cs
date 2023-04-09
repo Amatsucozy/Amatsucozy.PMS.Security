@@ -10,7 +10,7 @@ public static class Config
             new IdentityResources.OpenId(),
             new IdentityResources.Profile()
         };
-    
+
     public static IEnumerable<ApiScope> ApiScopes =>
         new List<ApiScope>
         {

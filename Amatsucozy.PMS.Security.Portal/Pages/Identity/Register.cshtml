@@ -69,4 +69,30 @@
 
 @section Scripts {
   <partial name="_ValidationScriptsPartial"/>
+  <script>
+    $(document).ready(function() {
+      $("#registerSubmit").off('click').click(function() {
+        $("#registerForm").off('submit').submit(function (event) {
+          event.preventDefault();
+          $.ajax({
+            type: "POST",
+            url: "/Identity/Register",
+            data: {
+              returnUrl: "@Model.ReturnUrl",
+              ...$("#registerForm").serializeArray().reduce((obj, item) => {
+                obj[item.name] = item.value;
+                return obj;
+              }, {})
+            },
+            success: function () {
+              openInformationDialog("Success", "You have successfully registered. Please check your email to confirm your account.");
+            },
+            error: function (httpResponse) {
+              openInformationDialog("Error", httpResponse.responseText);
+            }
+          });
+        });
+      });
+    });
+  </script>
 }

@@ -3,7 +3,6 @@ using System.Text;
 using System.Text.Encodings.Web;
 using Amatsucozy.PMS.Security.Contracts.Identity;
 using Amatsucozy.PMS.Security.Core.Identity;
-using Amatsucozy.PMS.Security.Portal.Pages.Shared;
 using Amatsucozy.PMS.Security.Portal.Services;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication;
@@ -67,7 +66,7 @@ public class Register : PageModel
     {
         ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
-        if (!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) return BadRequest("Invalid model state");
 
         var user = new User();
 
@@ -100,12 +99,6 @@ public class Register : PageModel
                     HtmlEncoder.Default.Encode(callbackUrl ?? string.Empty),
                     "Amatsucozy"
                 ));
-
-            return RedirectToPage("/Identity/Result", new Result
-            {
-                Title = "Confirm your email",
-                Message = "Thank you for registering. Before you can sign in, please confirm your email address by clicking on the link we just emailed you."
-            });
         }
 
         foreach (var error in result.Errors)

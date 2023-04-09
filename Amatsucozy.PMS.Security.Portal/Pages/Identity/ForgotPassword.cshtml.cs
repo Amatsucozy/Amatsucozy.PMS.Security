@@ -6,6 +6,5 @@ public class ForgotPassword : PageModel
 {
     public void OnGet()
     {
-        
     }
 }

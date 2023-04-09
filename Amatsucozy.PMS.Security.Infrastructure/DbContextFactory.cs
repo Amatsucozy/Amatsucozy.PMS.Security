@@ -12,10 +12,9 @@ public sealed class DbContextFactory :
     public SecurityDbContext CreateDbContext(string[] args)
     {
         var options = new DbContextOptionsBuilder<SecurityDbContext>()
-            .UseNpgsql(DbConstants.ConnectionString, sqlBuilder =>
-            {
-                sqlBuilder.MigrationsAssembly(typeof(InfrastructureMarker).Assembly.GetName().Name);
-            }).Options;
+            .UseNpgsql(DbConstants.ConnectionString,
+                sqlBuilder => { sqlBuilder.MigrationsAssembly(typeof(InfrastructureMarker).Assembly.GetName().Name); })
+            .Options;
 
         return new SecurityDbContext(options);
     }
@@ -24,22 +23,20 @@ public sealed class DbContextFactory :
     PersistedGrantDbContext IDesignTimeDbContextFactory<PersistedGrantDbContext>.CreateDbContext(string[] args)
     {
         var options = new DbContextOptionsBuilder<PersistedGrantDbContext>()
-            .UseNpgsql(DbConstants.ConnectionString, sqlBuilder =>
-            {
-                sqlBuilder.MigrationsAssembly(typeof(InfrastructureMarker).Assembly.GetName().Name);
-            }).Options;
+            .UseNpgsql(DbConstants.ConnectionString,
+                sqlBuilder => { sqlBuilder.MigrationsAssembly(typeof(InfrastructureMarker).Assembly.GetName().Name); })
+            .Options;
 
         return new PersistedGrantDbContext(options);
     }
-    
+
     // dotnet ef migrations add -c ConfigurationDbContext -p ../Amatsucozy.PMS.Security.Infrastructure/Amatsucozy.PMS.Security.Infrastructure.csproj -o ../Amatsucozy.PMS.Security.Infrastructure/IdentityServerMigrations/Configuration ConfigurationDbContext-1.0
     ConfigurationDbContext IDesignTimeDbContextFactory<ConfigurationDbContext>.CreateDbContext(string[] args)
     {
         var options = new DbContextOptionsBuilder<ConfigurationDbContext>()
-            .UseNpgsql(DbConstants.ConnectionString, sqlBuilder =>
-            {
-                sqlBuilder.MigrationsAssembly(typeof(InfrastructureMarker).Assembly.GetName().Name);
-            }).Options;
+            .UseNpgsql(DbConstants.ConnectionString,
+                sqlBuilder => { sqlBuilder.MigrationsAssembly(typeof(InfrastructureMarker).Assembly.GetName().Name); })
+            .Options;
 
         return new ConfigurationDbContext(options);
     }

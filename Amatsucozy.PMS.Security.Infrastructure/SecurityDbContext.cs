@@ -14,7 +14,7 @@ public sealed class SecurityDbContext : IdentityDbContext<User, Role, Guid>
     {
         modelBuilder.HasDefaultSchema("security");
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(InfrastructureMarker).Assembly);
-        
+
         base.OnModelCreating(modelBuilder);
     }
 }
