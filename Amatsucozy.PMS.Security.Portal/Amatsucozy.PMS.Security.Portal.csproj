@@ -18,6 +18,7 @@
 
     <ItemGroup>
         <PackageReference Include="Amatsucozy.PMS.Email.Contracts" Version="1.0.1" />
+        <PackageReference Include="Amatsucozy.PMS.Shared.API" Version="1.0.0" />
         <PackageReference Include="Amatsucozy.PMS.Shared.Helpers" Version="1.0.5" />
         <PackageReference Include="Duende.IdentityServer.AspNetIdentity" Version="6.2.3" />
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.4" />
@@ -37,11 +38,13 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Amatsucozy.PMS.Security.Contracts\Amatsucozy.PMS.Security.Contracts.csproj" />
         <ProjectReference Include="..\Amatsucozy.PMS.Security.Core\Amatsucozy.PMS.Security.Core.csproj" />
         <ProjectReference Include="..\Amatsucozy.PMS.Security.Infrastructure\Amatsucozy.PMS.Security.Infrastructure.csproj" />
     </ItemGroup>
+    
     <ItemGroup>
-      <Folder Include="wwwroot\css" />
+        <Folder Include="wwwroot\css" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

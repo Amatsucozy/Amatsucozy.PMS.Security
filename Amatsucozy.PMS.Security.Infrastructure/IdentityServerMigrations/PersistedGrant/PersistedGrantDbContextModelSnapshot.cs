@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Security.Infrastructure.IdentityServerMigrations.PersistedGrant
+namespace Amatsucozy.PMS.Security.Infrastructure.IdentityServerMigrations.PersistedGrant
 {
     [DbContext(typeof(PersistedGrantDbContext))]
     partial class PersistedGrantDbContextModelSnapshot : ModelSnapshot
@@ -17,6 +17,7 @@ namespace Security.Infrastructure.IdentityServerMigrations.PersistedGrant
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("security")
                 .HasAnnotation("ProductVersion", "7.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -69,7 +70,7 @@ namespace Security.Infrastructure.IdentityServerMigrations.PersistedGrant
 
                     b.HasIndex("Expiration");
 
-                    b.ToTable("DeviceCodes", (string)null);
+                    b.ToTable("DeviceCodes", "security");
                 });
 
             modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.Key", b =>
@@ -105,7 +106,7 @@ namespace Security.Infrastructure.IdentityServerMigrations.PersistedGrant
 
                     b.HasIndex("Use");
 
-                    b.ToTable("Keys", (string)null);
+                    b.ToTable("Keys", "security");
                 });
 
             modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.PersistedGrant", b =>
@@ -169,7 +170,7 @@ namespace Security.Infrastructure.IdentityServerMigrations.PersistedGrant
 
                     b.HasIndex("SubjectId", "SessionId", "Type");
 
-                    b.ToTable("PersistedGrants", (string)null);
+                    b.ToTable("PersistedGrants", "security");
                 });
 
             modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ServerSideSession", b =>
@@ -229,7 +230,7 @@ namespace Security.Infrastructure.IdentityServerMigrations.PersistedGrant
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("ServerSideSessions", (string)null);
+                    b.ToTable("ServerSideSessions", "security");
                 });
 #pragma warning restore 612, 618
         }

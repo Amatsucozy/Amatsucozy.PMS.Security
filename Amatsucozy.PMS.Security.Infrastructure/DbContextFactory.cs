@@ -20,7 +20,7 @@ public sealed class DbContextFactory :
         return new SecurityDbContext(options);
     }
 
-    // dotnet ef migrations add -c PersistedGrantDbContext -p ../Amatsucozy.PMS.Security.Infrastructure/Amatsucozy.PMS.Security.Infrastructure.csproj -o ../Amatsucozy.PMS.Security.Infrastructure/IdentityServerMigrations/PersistedGrant PersistedGrantInit
+    // dotnet ef migrations add -c PersistedGrantDbContext -p ../Amatsucozy.PMS.Security.Infrastructure/Amatsucozy.PMS.Security.Infrastructure.csproj -o ../Amatsucozy.PMS.Security.Infrastructure/IdentityServerMigrations/PersistedGrant PersistedGrantDbContext-1.0
     PersistedGrantDbContext IDesignTimeDbContextFactory<PersistedGrantDbContext>.CreateDbContext(string[] args)
     {
         var options = new DbContextOptionsBuilder<PersistedGrantDbContext>()
@@ -32,7 +32,7 @@ public sealed class DbContextFactory :
         return new PersistedGrantDbContext(options);
     }
     
-    // dotnet ef migrations add -c ConfigurationDbContext -p ../Amatsucozy.PMS.Security.Infrastructure/Amatsucozy.PMS.Security.Infrastructure.csproj -o ../Amatsucozy.PMS.Security.Infrastructure/IdentityServerMigrations/Configuration ConfigurationInit
+    // dotnet ef migrations add -c ConfigurationDbContext -p ../Amatsucozy.PMS.Security.Infrastructure/Amatsucozy.PMS.Security.Infrastructure.csproj -o ../Amatsucozy.PMS.Security.Infrastructure/IdentityServerMigrations/Configuration ConfigurationDbContext-1.0
     ConfigurationDbContext IDesignTimeDbContextFactory<ConfigurationDbContext>.CreateDbContext(string[] args)
     {
         var options = new DbContextOptionsBuilder<ConfigurationDbContext>()

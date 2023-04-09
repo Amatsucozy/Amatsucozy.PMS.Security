@@ -1,3 +1,4 @@
+using Amatsucozy.PMS.Security.Core.Identity;
 using Amatsucozy.PMS.Security.Infrastructure;
 using Amatsucozy.PMS.Security.Portal;
 using Amatsucozy.PMS.Security.Portal.Services;
@@ -40,23 +41,25 @@ builder.Services.Configure<DataProtectionTokenProviderOptions>(options =>
 {
     options.TokenLifespan = TimeSpan.FromHours(1);
 });
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddDefaultTokenProviders()
-    .AddEntityFrameworkStores<SecurityDbContext>();
-
+builder.Services.AddIdentity<User, Role>()
+    .AddEntityFrameworkStores<SecurityDbContext>()
+    .AddDefaultTokenProviders();
 builder.Services.AddIdentityServer()
     .AddConfigurationStore(options =>
     {
         options.ConfigureDbContext = dbOptions => dbOptions.UseNpgsql(connectionString,
             sqlBuilder => { sqlBuilder.MigrationsAssembly(typeof(InfrastructureMarker).Assembly.GetName().Name); });
+        options.DefaultSchema = "security";
     })
     .AddOperationalStore(options =>
     {
         options.ConfigureDbContext = dbOptions => dbOptions.UseNpgsql(connectionString,
             sqlBuilder => { sqlBuilder.MigrationsAssembly(typeof(InfrastructureMarker).Assembly.GetName().Name); });
+        options.DefaultSchema = "security";
     })
-    .AddAspNetIdentity<IdentityUser>();
+    .AddAspNetIdentity<User>();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddControllers();
 builder.Services.AddRazorPages()
     .AddRazorRuntimeCompilation();
 builder.Services.AddAuthorization();
@@ -76,7 +79,6 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.HttpOnly = true;
     options.ExpireTimeSpan = TimeSpan.FromHours(1);
     options.SlidingExpiration = true;
-    
 });
 builder.Services.AddMessageQueue(builder.Configuration, typeof(PortalMarker));
 builder.Services.AddScoped<IEmailSendRequestBuilder, EmailSendRequestBuilder>();
@@ -101,6 +103,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseIdentityServer();
 app.UseAuthorization();
+app.MapControllers();
 app.MapRazorPages();
 
 app.Run();
