@@ -6,6 +6,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
+using Amatsucozy.PMS.Security.Core.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -18,12 +19,12 @@ namespace Amatsucozy.PMS.Security.Portal.Pages.Account.Manage;
 [Authorize]
 public class EmailModel : PageModel
 {
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly SignInManager<IdentityUser> _signInManager;
+    private readonly UserManager<User> _userManager;
+    private readonly SignInManager<User> _signInManager;
 
     public EmailModel(
-        UserManager<IdentityUser> userManager,
-        SignInManager<IdentityUser> signInManager)
+        UserManager<User> userManager,
+        SignInManager<User> signInManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;
@@ -71,7 +72,7 @@ public class EmailModel : PageModel
         public string NewEmail { get; set; }
     }
 
-    private async Task LoadAsync(IdentityUser user)
+    private async Task LoadAsync(User user)
     {
         var email = await _userManager.GetEmailAsync(user);
         Email = email;

@@ -3,6 +3,7 @@
 
 #nullable disable
 
+using Amatsucozy.PMS.Security.Core.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -14,14 +15,14 @@ namespace Amatsucozy.PMS.Security.Portal.Pages.Account.Manage;
 [Authorize]
 public class ExternalLoginsModel : PageModel
 {
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly SignInManager<IdentityUser> _signInManager;
-    private readonly IUserStore<IdentityUser> _userStore;
+    private readonly UserManager<User> _userManager;
+    private readonly SignInManager<User> _signInManager;
+    private readonly IUserStore<User> _userStore;
 
     public ExternalLoginsModel(
-        UserManager<IdentityUser> userManager,
-        SignInManager<IdentityUser> signInManager,
-        IUserStore<IdentityUser> userStore)
+        UserManager<User> userManager,
+        SignInManager<User> signInManager,
+        IUserStore<User> userStore)
     {
         _userManager = userManager;
         _signInManager = signInManager;
@@ -67,7 +68,7 @@ public class ExternalLoginsModel : PageModel
             .ToList();
 
         string passwordHash = null;
-        if (_userStore is IUserPasswordStore<IdentityUser> userPasswordStore)
+        if (_userStore is IUserPasswordStore<User> userPasswordStore)
         {
             passwordHash = await userPasswordStore.GetPasswordHashAsync(user, HttpContext.RequestAborted);
         }

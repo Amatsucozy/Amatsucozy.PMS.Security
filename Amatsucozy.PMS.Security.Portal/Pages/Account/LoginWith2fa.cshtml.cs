@@ -4,6 +4,7 @@
 #nullable disable
 
 using System.ComponentModel.DataAnnotations;
+using Amatsucozy.PMS.Security.Core.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,13 +13,13 @@ namespace Amatsucozy.PMS.Security.Portal.Pages.Account;
 
 public class LoginWith2faModel : PageModel
 {
-    private readonly SignInManager<IdentityUser> _signInManager;
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly SignInManager<User> _signInManager;
+    private readonly UserManager<User> _userManager;
     private readonly ILogger<LoginWith2faModel> _logger;
 
     public LoginWith2faModel(
-        SignInManager<IdentityUser> signInManager,
-        UserManager<IdentityUser> userManager,
+        SignInManager<User> signInManager,
+        UserManager<User> userManager,
         ILogger<LoginWith2faModel> logger)
     {
         _signInManager = signInManager;

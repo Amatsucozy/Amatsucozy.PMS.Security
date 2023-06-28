@@ -3,6 +3,7 @@
 
 #nullable disable
 
+using Amatsucozy.PMS.Security.Core.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,13 +14,13 @@ namespace Amatsucozy.PMS.Security.Portal.Pages.Account.Manage;
 [Authorize]
 public class ResetAuthenticatorModel : PageModel
 {
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly SignInManager<IdentityUser> _signInManager;
+    private readonly UserManager<User> _userManager;
+    private readonly SignInManager<User> _signInManager;
     private readonly ILogger<ResetAuthenticatorModel> _logger;
 
     public ResetAuthenticatorModel(
-        UserManager<IdentityUser> userManager,
-        SignInManager<IdentityUser> signInManager,
+        UserManager<User> userManager,
+        SignInManager<User> signInManager,
         ILogger<ResetAuthenticatorModel> logger)
     {
         _userManager = userManager;

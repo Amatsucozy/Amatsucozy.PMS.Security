@@ -1,6 +1,7 @@
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Mvc.TagHelpers
-@inject SignInManager<IdentityUser> SignInManager
+@using Amatsucozy.PMS.Security.Core.Identity
+@inject SignInManager<User> SignInManager
 @{
   var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

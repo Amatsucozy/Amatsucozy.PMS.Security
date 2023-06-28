@@ -3,6 +3,7 @@
 
 #nullable disable
 
+using Amatsucozy.PMS.Security.Core.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +14,11 @@ namespace Amatsucozy.PMS.Security.Portal.Pages.Account.Manage;
 [Authorize]
 public class GenerateRecoveryCodesModel : PageModel
 {
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<User> _userManager;
     private readonly ILogger<GenerateRecoveryCodesModel> _logger;
 
     public GenerateRecoveryCodesModel(
-        UserManager<IdentityUser> userManager,
+        UserManager<User> userManager,
         ILogger<GenerateRecoveryCodesModel> logger)
     {
         _userManager = userManager;

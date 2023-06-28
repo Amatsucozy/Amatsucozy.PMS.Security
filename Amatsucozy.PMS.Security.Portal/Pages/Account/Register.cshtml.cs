@@ -6,6 +6,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
+using Amatsucozy.PMS.Security.Core.Identity;
 using Amatsucozy.PMS.Security.Portal.Services;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication;
@@ -18,18 +19,18 @@ namespace Amatsucozy.PMS.Security.Portal.Pages.Account;
 
 public class RegisterModel : PageModel
 {
-    private readonly SignInManager<IdentityUser> _signInManager;
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly IUserStore<IdentityUser> _userStore;
-    private readonly IUserEmailStore<IdentityUser> _emailStore;
+    private readonly SignInManager<User> _signInManager;
+    private readonly UserManager<User> _userManager;
+    private readonly IUserStore<User> _userStore;
+    private readonly IUserEmailStore<User> _emailStore;
     private readonly ILogger<RegisterModel> _logger;
     private readonly IEmailSendRequestBuilder _emailSendRequestBuilder;
     private readonly IPublishEndpoint _publishEndpoint;
 
     public RegisterModel(
-        UserManager<IdentityUser> userManager,
-        IUserStore<IdentityUser> userStore,
-        SignInManager<IdentityUser> signInManager,
+        UserManager<User> userManager,
+        IUserStore<User> userStore,
+        SignInManager<User> signInManager,
         ILogger<RegisterModel> logger,
         IEmailSendRequestBuilder emailSendRequestBuilder,
         IPublishEndpoint publishEndpoint)
@@ -155,27 +156,27 @@ public class RegisterModel : PageModel
         return Page();
     }
 
-    private IdentityUser CreateUser()
+    private User CreateUser()
     {
         try
         {
-            return new IdentityUser();
+            return new User();
         }
         catch
         {
-            throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
-                                                $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+            throw new InvalidOperationException($"Can't create an instance of '{nameof(User)}'. " +
+                                                $"Ensure that '{nameof(User)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                                                 $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
         }
     }
 
-    private IUserEmailStore<IdentityUser> GetEmailStore()
+    private IUserEmailStore<User> GetEmailStore()
     {
         if (!_userManager.SupportsUserEmail)
         {
             throw new NotSupportedException("The default UI requires a user store with email support.");
         }
 
-        return (IUserEmailStore<IdentityUser>)_userStore;
+        return (IUserEmailStore<User>)_userStore;
     }
 }

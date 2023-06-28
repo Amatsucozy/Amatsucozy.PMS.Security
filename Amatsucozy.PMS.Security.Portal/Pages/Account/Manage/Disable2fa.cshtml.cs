@@ -3,6 +3,7 @@
 
 #nullable disable
 
+using Amatsucozy.PMS.Security.Core.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +14,11 @@ namespace Amatsucozy.PMS.Security.Portal.Pages.Account.Manage;
 [Authorize]
 public class Disable2faModel : PageModel
 {
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<User> _userManager;
     private readonly ILogger<Disable2faModel> _logger;
 
     public Disable2faModel(
-        UserManager<IdentityUser> userManager,
+        UserManager<User> userManager,
         ILogger<Disable2faModel> logger)
     {
         _userManager = userManager;
