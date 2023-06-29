@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Amatsucozy.PMS.Security.Portal.Controllers;
 
+[Authorize("ApiScope")]
 public sealed class TokenController : SecuredController
 {
     private readonly ITokenService _tokenService;

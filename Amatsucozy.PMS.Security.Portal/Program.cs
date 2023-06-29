@@ -46,7 +46,7 @@ builder.Services.AddIdentity<User, Role>()
     .AddEntityFrameworkStores<SecurityDbContext>()
     .AddDefaultTokenProviders();
 builder.Services
-    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddAuthentication()
     .AddJwtBearer(options =>
     {
         var configSection = builder.Configuration.GetSection("IdentityServer");
@@ -54,13 +54,6 @@ builder.Services
         options.TokenValidationParameters.ValidateAudience = false;
         options.TokenValidationParameters.ValidTypes = new[] { "at+jwt" };
     });
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("ApiScope", policy =>
-    {
-        policy.RequireClaim("scope", "sts");
-    });
-});
 builder.Services.AddIdentityServer()
     .AddConfigurationStore(options =>
     {
@@ -75,6 +68,15 @@ builder.Services.AddIdentityServer()
         options.DefaultSchema = "security";
     })
     .AddAspNetIdentity<User>();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ApiScope", policy =>
+    {
+        policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("scope", "sts");
+    });
+});
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("default", policyBuilder =>
