@@ -21,6 +21,7 @@
         <PackageReference Include="Amatsucozy.PMS.Shared.API" Version="1.0.0" />
         <PackageReference Include="Amatsucozy.PMS.Shared.Helpers" Version="1.0.5" />
         <PackageReference Include="Duende.IdentityServer.AspNetIdentity" Version="6.2.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.4" />
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.4" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.4" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.4" />

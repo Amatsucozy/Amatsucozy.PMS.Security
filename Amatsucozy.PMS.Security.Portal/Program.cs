@@ -3,6 +3,7 @@ using Amatsucozy.PMS.Security.Infrastructure;
 using Amatsucozy.PMS.Security.Portal;
 using Amatsucozy.PMS.Security.Portal.Services;
 using Amatsucozy.PMS.Shared.Helpers.MessageQueues;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -44,6 +45,22 @@ builder.Services.Configure<DataProtectionTokenProviderOptions>(options =>
 builder.Services.AddIdentity<User, Role>()
     .AddEntityFrameworkStores<SecurityDbContext>()
     .AddDefaultTokenProviders();
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        var configSection = builder.Configuration.GetSection("IdentityServer");
+        options.Authority = configSection.GetValue<string>("Authority");
+        options.TokenValidationParameters.ValidateAudience = false;
+        options.TokenValidationParameters.ValidTypes = new[] { "at+jwt" };
+    });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ApiScope", policy =>
+    {
+        policy.RequireClaim("scope", "sts");
+    });
+});
 builder.Services.AddIdentityServer()
     .AddConfigurationStore(options =>
     {
@@ -58,11 +75,6 @@ builder.Services.AddIdentityServer()
         options.DefaultSchema = "security";
     })
     .AddAspNetIdentity<User>();
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-builder.Services.AddControllers();
-builder.Services.AddRazorPages()
-    .AddRazorRuntimeCompilation();
-builder.Services.AddAuthorization();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("default", policyBuilder =>
@@ -71,6 +83,10 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader();
     });
 });
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddRazorPages()
+    .AddRazorRuntimeCompilation();
+builder.Services.AddControllers();
 builder.Services.ConfigureApplicationCookie(options =>
 {
     // Cookie settings
@@ -100,10 +116,10 @@ app.DbStart();
 app.UseHttpsRedirection();
 app.UseCors("default");
 app.UseStaticFiles();
-app.UseRouting();
+app.MapRazorPages();
+app.MapControllers();
+app.UseAuthentication();
 app.UseIdentityServer();
 app.UseAuthorization();
-app.MapControllers();
-app.MapRazorPages();
 
 app.Run();
