@@ -1,11 +1,15 @@
+using System.IdentityModel.Tokens.Jwt;
 using Amatsucozy.PMS.Security.Core.Identity;
 using Amatsucozy.PMS.Security.Infrastructure;
 using Amatsucozy.PMS.Security.Portal;
 using Amatsucozy.PMS.Security.Portal.Services;
 using Amatsucozy.PMS.Shared.Helpers.MessageQueues;
+using Duende.IdentityServer;
+using IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,22 +44,20 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 builder.Services.Configure<DataProtectionTokenProviderOptions>(options =>
 {
-    options.TokenLifespan = TimeSpan.FromHours(1);
+    options.TokenLifespan = TimeSpan.FromHours(24);
 });
 builder.Services.AddIdentity<User, Role>()
     .AddEntityFrameworkStores<SecurityDbContext>()
     .AddDefaultTokenProviders();
-builder.Services
-    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        var configSection = builder.Configuration.GetSection("IdentityServer");
-        options.Authority = configSection.GetValue<string>("Authority");
-        options.TokenValidationParameters.ValidateAudience = false;
-        options.TokenValidationParameters.ValidTypes = new[] { "at+jwt" };
-    });
+
 builder.Services.AddAuthorization(options =>
 {
+    options.AddPolicy(IdentityServerConstants.LocalApi.PolicyName, policy =>
+    {
+        policy.AddAuthenticationSchemes(IdentityServerConstants.LocalApi.AuthenticationScheme);
+        policy.RequireAuthenticatedUser();
+        // custom requirements
+    });
     options.AddPolicy("ApiScope", policy =>
     {
         policy.RequireClaim("scope", "sts");
@@ -75,6 +77,26 @@ builder.Services.AddIdentityServer()
         options.DefaultSchema = "security";
     })
     .AddAspNetIdentity<User>();
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        var configSection = builder.Configuration.GetSection("IdentityServer");
+        options.Authority = configSection.GetValue<string>("Authority");
+        options.TokenValidationParameters.ValidateAudience = false;
+        // options.TokenValidationParameters.ValidTypes = new[] { "at+jwt" };
+        // options.ForwardDefaultSelector = (o) => "introspection";
+    })
+    // .AddOAuth2Introspection("introspection", options =>
+    // {
+    //     var configSection = builder.Configuration.GetSection("IdentityServer");
+    //
+    //     // options.Authority = configSection.GetValue<string>("Authority");
+    //     options.ClientId = "pat.client";
+    //     options.ClientCredentialStyle = ClientCredentialStyle.AuthorizationHeader;
+    //     // options.ClientSecret = "secret";
+    // });
+    .AddLocalApi();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("default", policyBuilder =>
@@ -93,8 +115,9 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
     options.Cookie.SameSite = SameSiteMode.Strict;
     options.Cookie.HttpOnly = true;
-    options.ExpireTimeSpan = TimeSpan.FromHours(1);
+    options.ExpireTimeSpan = TimeSpan.FromHours(48);
     options.SlidingExpiration = true;
+    options.Cookie.MaxAge = TimeSpan.FromHours(48);
 });
 builder.Services.AddMessageQueue(builder.Configuration, typeof(PortalMarker));
 builder.Services.AddScoped<IEmailSendRequestBuilder, EmailSendRequestBuilder>();
@@ -118,7 +141,6 @@ app.UseCors("default");
 app.UseStaticFiles();
 app.MapRazorPages();
 app.MapControllers();
-app.UseAuthentication();
 app.UseIdentityServer();
 app.UseAuthorization();
 

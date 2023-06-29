@@ -1,4 +1,5 @@
-﻿using Duende.IdentityServer.Models;
+﻿using Duende.IdentityServer;
+using Duende.IdentityServer.Models;
 
 namespace Amatsucozy.PMS.Security.Core;
 
@@ -16,7 +17,8 @@ public static class Config
         {
             new(name: "sts", displayName: "STS"),
             new(name: "accounts", displayName: "Accounts"),
-            new(name: "pms", displayName: "PMS")
+            new(name: "pms", displayName: "PMS"),
+            new (IdentityServerConstants.LocalApi.ScopeName)
         };
 
     public static IEnumerable<Client> Clients =>
@@ -32,7 +34,8 @@ public static class Config
                     "profile",
                     "sts",
                     "accounts",
-                    "pms"
+                    "pms",
+                    IdentityServerConstants.LocalApi.ScopeName
                 },
                 RedirectUris =
                 {
@@ -48,7 +51,7 @@ public static class Config
                     "https://localhost:4200"
                 },
                 AccessTokenType = AccessTokenType.Jwt,
-                RequireClientSecret = false
+                RequireClientSecret = false,
             }
         };
 }
