@@ -45,14 +45,20 @@ builder.Services.Configure<DataProtectionTokenProviderOptions>(options =>
 builder.Services.AddIdentity<User, Role>()
     .AddEntityFrameworkStores<SecurityDbContext>()
     .AddDefaultTokenProviders();
+var configSection = builder.Configuration.GetSection("IdentityServer");
 builder.Services
     .AddAuthentication()
     .AddJwtBearer(options =>
     {
-        var configSection = builder.Configuration.GetSection("IdentityServer");
         options.Authority = configSection.GetValue<string>("Authority");
         options.TokenValidationParameters.ValidateAudience = false;
         options.TokenValidationParameters.ValidTypes = new[] { "at+jwt" };
+        // options.ForwardDefaultSelector = IntrospectionTokenHelper.ForwardReferenceToken("introspection");
+    })
+    .AddOAuth2Introspection("Introspection", options =>
+    {
+        options.Authority = configSection.GetValue<string>("Authority");
+        options.ClientId = "pms-ui";
     });
 builder.Services.AddIdentityServer()
     .AddConfigurationStore(options =>
@@ -73,6 +79,13 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("ApiScope", policy =>
     {
         policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("scope", "sts");
+    });
+
+    options.AddPolicy("ReferenceToken", policy =>
+    {
+        policy.AuthenticationSchemes.Add("Introspection");
         policy.RequireAuthenticatedUser();
         policy.RequireClaim("scope", "sts");
     });

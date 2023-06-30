@@ -2,7 +2,6 @@
 using Amatsucozy.PMS.Security.Contracts.Identity;
 using Amatsucozy.PMS.Shared.API.Controllers;
 using Duende.IdentityServer;
-using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -45,11 +44,13 @@ public sealed class TokenController : SecuredController
             Issuer = await _issuerNameService.GetCurrentAsync(),
             Lifetime = 300,
             CreationTime = DateTime.UtcNow,
-            ClientId = "pat.client",
+            ClientId = "pms-ui",
             Claims = new List<Claim>
             {
-                new("client_id", "pat.client"),
-                new("sub", User.GetSubjectId()),
+                new("client_id", "pms-ui"),
+                new("sub",
+                    User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ??
+                    throw new InvalidOperationException()),
             },
             AccessTokenType = AccessTokenType.Reference
         };
