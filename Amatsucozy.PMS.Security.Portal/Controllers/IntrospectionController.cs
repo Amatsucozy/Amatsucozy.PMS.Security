@@ -4,12 +4,20 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Amatsucozy.PMS.Security.Portal.Controllers;
 
-[Authorize("ReferenceToken")]
-public sealed class IntrospectionController: PublicController
+public sealed class IntrospectionController: SecuredController
 {
-    [Route("[action]")]
+    [Authorize("Introspection")]
     [HttpGet]
-    public IActionResult Ping()
+    [Route("ping/[action]")]
+    public IActionResult Introspection()
+    {
+        return Ok("pong");
+    }
+
+    [Authorize("Introspection1")]
+    [Route("ping/[action]")]
+    [HttpGet]
+    public IActionResult Introspection1()
     {
         return Ok("pong");
     }

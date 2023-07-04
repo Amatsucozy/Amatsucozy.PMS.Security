@@ -1,8 +1,10 @@
+using Amatsucozy.PMS.Security.Core;
 using Amatsucozy.PMS.Security.Core.Identity;
 using Amatsucozy.PMS.Security.Infrastructure;
 using Amatsucozy.PMS.Security.Portal;
 using Amatsucozy.PMS.Security.Portal.Services;
 using Amatsucozy.PMS.Shared.Helpers.MessageQueues;
+using IdentityModel.AspNetCore.OAuth2Introspection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -53,12 +55,20 @@ builder.Services
         options.Authority = configSection.GetValue<string>("Authority");
         options.TokenValidationParameters.ValidateAudience = false;
         options.TokenValidationParameters.ValidTypes = new[] { "at+jwt" };
-        // options.ForwardDefaultSelector = IntrospectionTokenHelper.ForwardReferenceToken("introspection");
     })
     .AddOAuth2Introspection("Introspection", options =>
     {
         options.Authority = configSection.GetValue<string>("Authority");
-        options.ClientId = "pms-ui";
+        options.ClientId = "external";
+        options.ClientSecret = "442B632E-1341-4643-9883-BC4C24395582";
+        options.TokenRetriever = TokenRetrieval.FromAuthorizationHeader("Introspection");
+    })
+    .AddOAuth2Introspection("Introspection1", options =>
+    {
+        options.Authority = configSection.GetValue<string>("Authority");
+        options.ClientId = "sts";
+        options.ClientSecret = "442B632E-1341-4643-9883-BC4C24395582";
+        options.TokenRetriever = TokenRetrieval.FromAuthorizationHeader("Introspection1");
     });
 builder.Services.AddIdentityServer()
     .AddConfigurationStore(options =>
@@ -82,10 +92,16 @@ builder.Services.AddAuthorization(options =>
         policy.RequireAuthenticatedUser();
         policy.RequireClaim("scope", "sts");
     });
-
-    options.AddPolicy("ReferenceToken", policy =>
+    options.AddPolicy("Introspection", policy =>
     {
         policy.AuthenticationSchemes.Add("Introspection");
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("scope", "accounts");
+        policy.RequireClaim("scope", "pms");
+    });
+    options.AddPolicy("Introspection1", policy =>
+    {
+        policy.AuthenticationSchemes.Add("Introspection1");
         policy.RequireAuthenticatedUser();
         policy.RequireClaim("scope", "sts");
     });

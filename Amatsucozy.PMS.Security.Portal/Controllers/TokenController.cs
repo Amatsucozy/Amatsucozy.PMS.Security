@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using Amatsucozy.PMS.Security.Contracts.Identity;
+using Amatsucozy.PMS.Security.Core;
 using Amatsucozy.PMS.Shared.API.Controllers;
 using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
@@ -44,10 +45,10 @@ public sealed class TokenController : SecuredController
             Issuer = await _issuerNameService.GetCurrentAsync(),
             Lifetime = 300,
             CreationTime = DateTime.UtcNow,
-            ClientId = "pms-ui",
+            ClientId = "pat.client",
             Claims = new List<Claim>
             {
-                new("client_id", "pms-ui"),
+                new("client_id", "pat.client"),
                 new("sub",
                     User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ??
                     throw new InvalidOperationException()),

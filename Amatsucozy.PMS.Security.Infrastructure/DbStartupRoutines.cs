@@ -51,6 +51,16 @@ public static class DbStartupRoutines
             configDbContext.SaveChanges();
         }
 
+        if (!configDbContext.ApiResources.Any())
+        {
+            foreach (var resource in Config.ApiResources)
+            {
+                configDbContext.ApiResources.Add(resource.ToEntity());
+            }
+
+            configDbContext.SaveChanges();
+        }
+
         if (!configDbContext.ApiScopes.Any())
         {
             foreach (var resource in Config.ApiScopes)
